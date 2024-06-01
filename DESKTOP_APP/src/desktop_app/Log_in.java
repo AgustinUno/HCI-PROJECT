@@ -57,6 +57,7 @@ public class Log_in extends javax.swing.JFrame {
         subtitle = new javax.swing.JLabel();
         mid_design = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Administrator Access");
@@ -271,6 +272,8 @@ public class Log_in extends javax.swing.JFrame {
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         main_panel.add(jLabel1);
         jLabel1.setBounds(0, 0, 1070, 600);
+        main_panel.add(jPanel2);
+        jPanel2.setBounds(30, 30, 1000, 540);
 
         getContentPane().add(main_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1070, 600));
 
@@ -490,6 +493,7 @@ public class Log_in extends javax.swing.JFrame {
     private javax.swing.JLabel input_design;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel main_panel;
     private javax.swing.JLabel mid_design;
     private javax.swing.JPanel mid_panel;
