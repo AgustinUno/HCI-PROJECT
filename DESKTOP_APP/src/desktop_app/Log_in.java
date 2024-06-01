@@ -28,7 +28,6 @@ public class Log_in extends javax.swing.JFrame {
         setUndecorated(true);
         setBackground(new Color(0.0f, 0.0f, 0.0f, 0.0f));
         initComponents();
-
         setLocationRelativeTo(null); //Center the frame to screen
 
     }
@@ -66,6 +65,19 @@ public class Log_in extends javax.swing.JFrame {
         setLocationByPlatform(true);
         setModalExclusionType(null);
         setResizable(false);
+        addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                formFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                formFocusLost(evt);
+            }
+        });
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                formMouseEntered(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         main_panel.setBackground(new java.awt.Color(255, 255, 255));
@@ -220,6 +232,9 @@ public class Log_in extends javax.swing.JFrame {
         subtitle1.setToolTipText("");
         subtitle1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         subtitle1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                subtitle1MouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 subtitle1MouseEntered(evt);
             }
@@ -246,7 +261,7 @@ public class Log_in extends javax.swing.JFrame {
 
         mid_design.setIcon(new javax.swing.ImageIcon(getClass().getResource("/desktop_app/assets/mid_panel.png"))); // NOI18N
         mid_panel.add(mid_design);
-        mid_design.setBounds(30, 50, 500, 448);
+        mid_design.setBounds(30, 40, 500, 448);
 
         main_panel.add(mid_panel);
         mid_panel.setBounds(250, 30, 560, 540);
@@ -354,6 +369,29 @@ public class Log_in extends javax.swing.JFrame {
         togglePasswordVisibility();
     }//GEN-LAST:event_pass_viewMouseClicked
 
+    private void subtitle1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_subtitle1MouseClicked
+        Forgot_pwrd frame = new Forgot_pwrd();
+        frame.setVisible(true);
+     
+       
+    }//GEN-LAST:event_subtitle1MouseClicked
+
+    private void formMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseEntered
+          
+    }//GEN-LAST:event_formMouseEntered
+
+    private void formFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formFocusGained
+           Log_in fr1 = new Log_in();
+        Forgot_pwrd fr2 = new Forgot_pwrd();
+        fr1.setOpacity(0.5f);
+        fr2.setOpacity(1.0f);
+    }//GEN-LAST:event_formFocusGained
+
+    private void formFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formFocusLost
+          Log_in fr1 = new Log_in();
+        fr1.setOpacity(1.0f);
+    }//GEN-LAST:event_formFocusLost
+
     //custom functions
     private void togglePasswordVisibility() {
         if (isPasswordVisible) {
@@ -379,7 +417,7 @@ public class Log_in extends javax.swing.JFrame {
         String query = "SELECT * FROM admin_data WHERE user_id = ? AND pass = ?";
         
         try {
-            ps = db_con.getConnection().prepareStatement(query);
+            ps = Db_con.getConnection().prepareStatement(query);
             ps.setString(1, schoolId);
             ps.setString(2, password);
 

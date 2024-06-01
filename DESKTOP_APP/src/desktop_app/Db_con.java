@@ -12,7 +12,7 @@ import java.util.logging.Logger;
  *
  * @author Main
  */
-public class db_con {
+public class Db_con {
     private static String servername = "localhost";
     private static String username = "root";
     private static String dbname  = "admin_info";
@@ -33,7 +33,7 @@ public class db_con {
             cnx = datasource.getConnection();
             System.out.println("Connected Successfully");
         } catch (SQLException ex) {
-            Logger.getLogger(db_con.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Db_con.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Connection Failed");
         }
         
