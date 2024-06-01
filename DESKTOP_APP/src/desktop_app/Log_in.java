@@ -4,9 +4,16 @@
  */
 package desktop_app;
 
+import com.mysql.cj.xdevapi.Statement;
+import com.sun.jdi.connect.spi.Connection;
 import java.awt.Color;
-import java.awt.Dimension;
+import java.sql.PreparedStatement;
 import javax.swing.ImageIcon;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,13 +26,10 @@ public class Log_in extends javax.swing.JFrame {
      */
     public Log_in() {
         setUndecorated(true);
-        setBackground(new Color(0.0f, 0.0f, 0.0f, 0.0f)); 
+        setBackground(new Color(0.0f, 0.0f, 0.0f, 0.0f));
         initComponents();
-        
+
         setLocationRelativeTo(null); //Center the frame to screen
-       
-        
-     
 
     }
 
@@ -258,13 +262,12 @@ public class Log_in extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
-    
-    
-    
+
     private void sign_in_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sign_in_btnActionPerformed
         System.out.println("Username: " + Schl_ID_field.getText());
         System.out.println("Password: " + Pw_secured_field.getText());
+        admin_check();
+
 
     }//GEN-LAST:event_sign_in_btnActionPerformed
 
@@ -307,21 +310,21 @@ public class Log_in extends javax.swing.JFrame {
     }//GEN-LAST:event_Pw_secured_fieldKeyTyped
 
     private void Pw_secured_fieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Pw_secured_fieldFocusLost
-       if (Pw_secured_field.getPassword().length == 0) {
-        Pw_secured_field.setText("Your password");
-        Pw_secured_field.setForeground(Color.GRAY); // Optional: Set text color to gray when placeholder text is restored
-        togglePasswordVisibility(); // Hide the password when focus is lost
-    }
-       
+        if (Pw_secured_field.getPassword().length == 0) {
+            Pw_secured_field.setText("Your password");
+            Pw_secured_field.setForeground(Color.GRAY); // Optional: Set text color to gray when placeholder text is restored
+            togglePasswordVisibility(); // Hide the password when focus is lost
+        }
+
     }//GEN-LAST:event_Pw_secured_fieldFocusLost
 
     private void Pw_secured_fieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Pw_secured_fieldFocusGained
         if (Pw_secured_field.getText().equals("Your password")) {
-        Pw_secured_field.setText(null);
-          Pw_secured_field.setEchoChar('*');
-        Pw_secured_field.setForeground(Color.BLACK); // Optional: Set text color to black when focused
-       // togglePasswordVisibility(); // Show the password when focused
-    }
+            Pw_secured_field.setText(null);
+            Pw_secured_field.setEchoChar('*');
+            Pw_secured_field.setForeground(Color.BLACK); // Optional: Set text color to black when focused
+            // togglePasswordVisibility(); // Show the password when focused
+        }
     }//GEN-LAST:event_Pw_secured_fieldFocusGained
 
     private void Pw_secured_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Pw_secured_fieldActionPerformed
@@ -329,12 +332,12 @@ public class Log_in extends javax.swing.JFrame {
     }//GEN-LAST:event_Pw_secured_fieldActionPerformed
 
     private void subtitle1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_subtitle1MouseEntered
-       subtitle1.setForeground(new Color(164, 186, 189));
+        subtitle1.setForeground(new Color(164, 186, 189));
 
     }//GEN-LAST:event_subtitle1MouseEntered
 
     private void subtitle1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_subtitle1MouseExited
-        subtitle1.setForeground(new Color(17,149,230));
+        subtitle1.setForeground(new Color(17, 149, 230));
 
     }//GEN-LAST:event_subtitle1MouseExited
 
@@ -344,31 +347,65 @@ public class Log_in extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel1MousePressed
 
     private void jPanel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseDragged
-        setLocation(evt.getXOnScreen()-posX, evt.getYOnScreen()-posY);
+        setLocation(evt.getXOnScreen() - posX, evt.getYOnScreen() - posY);
     }//GEN-LAST:event_jPanel1MouseDragged
 
     private void pass_viewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pass_viewMouseClicked
-       togglePasswordVisibility(); 
+        togglePasswordVisibility();
     }//GEN-LAST:event_pass_viewMouseClicked
-    
+
     //custom functions
     private void togglePasswordVisibility() {
-    if (isPasswordVisible) {
-        Pw_secured_field.setEchoChar('\u2022'); // Echo character for hiding password
-        pass_view.setIcon(new ImageIcon(getClass().getResource("/desktop_app/assets/eye.png")));
-        pass_view.setToolTipText("show");
-    } else {
-        Pw_secured_field.setEchoChar((char) 0); // Echo character for showing password
-        pass_view.setIcon(new ImageIcon(getClass().getResource("/desktop_app/assets/view.png")));
-        pass_view.setToolTipText("hide");
+        if (isPasswordVisible) {
+            Pw_secured_field.setEchoChar('\u2022'); // Echo character for hiding password
+            pass_view.setIcon(new ImageIcon(getClass().getResource("/desktop_app/assets/eye.png")));
+            pass_view.setToolTipText("show");
+        } else {
+            Pw_secured_field.setEchoChar((char) 0); // Echo character for showing password
+            pass_view.setIcon(new ImageIcon(getClass().getResource("/desktop_app/assets/view.png")));
+            pass_view.setToolTipText("hide");
+        }
+        isPasswordVisible = !isPasswordVisible; // Toggle the state
     }
-    isPasswordVisible = !isPasswordVisible; // Toggle the state
-}
 
-    
-    
-    
-    /**\
+    public void admin_check() {
+        PreparedStatement ps;
+        ResultSet rs;
+
+        String schoolId = Schl_ID_field.getText().trim();
+        String password;
+        password = new String(Pw_secured_field.getPassword()).trim();
+
+        String query = "SELECT * FROM admin_data WHERE user_id = ? AND pass = ?";
+        
+        try {
+            ps = db_con.getConnection().prepareStatement(query);
+            ps.setString(1, schoolId);
+            ps.setString(2, password);
+
+            rs = ps.executeQuery();
+
+            // Check if the ResultSet contains any rows
+            if (rs.next()) {
+                // User exists
+                JOptionPane.showMessageDialog(null, "WELCOME ADMIN!");
+            } else {
+                // User does not exist
+                JOptionPane.showMessageDialog(null, "INVALID CREDENTIALS");
+            }
+
+            // Close ResultSet, PreparedStatement, and Connection
+            rs.close();
+            ps.close();
+        } catch (SQLException ex) {
+            // Handle SQL exceptions
+            ex.printStackTrace();
+        }
+    }
+
+    /**
+     * \
+     *
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -398,12 +435,9 @@ public class Log_in extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-            Log_in logInFrame = new Log_in();
-            logInFrame.setVisible(true);
-           
+                Log_in logInFrame = new Log_in();
+                logInFrame.setVisible(true);
 
-
-               
             }
         });
     }
@@ -432,6 +466,5 @@ public class Log_in extends javax.swing.JFrame {
     int posX, posY;
     private boolean isEyeIcon = true;
     private boolean isPasswordVisible = false;
-    
-    
+
 }
