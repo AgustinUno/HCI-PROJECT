@@ -17,9 +17,14 @@ public class Log_in extends javax.swing.JFrame {
      * Creates new form Log_in
      */
     public Log_in() {
-
+        setUndecorated(true);
+        setBackground(new Color(0.0f, 0.0f, 0.0f, 0.0f)); 
         initComponents();
+        
         setLocationRelativeTo(null); //Center the frame to screen
+       
+        
+     
 
     }
 
@@ -33,6 +38,8 @@ public class Log_in extends javax.swing.JFrame {
     private void initComponents() {
 
         main_panel = new javax.swing.JPanel();
+        close_btn = new com.k33ptoo.components.KButton();
+        jPanel1 = new javax.swing.JPanel();
         mid_panel = new javax.swing.JPanel();
         Title = new javax.swing.JLabel();
         pup_icon = new javax.swing.JLabel();
@@ -44,17 +51,56 @@ public class Log_in extends javax.swing.JFrame {
         input_design = new javax.swing.JLabel();
         subtitle = new javax.swing.JLabel();
         mid_design = new javax.swing.JLabel();
-        close_btn = new com.k33ptoo.components.KButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Administrator Access");
-        setUndecorated(true);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setFocusCycleRoot(false);
+        setLocationByPlatform(true);
+        setModalExclusionType(null);
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         main_panel.setBackground(new java.awt.Color(255, 255, 255));
+        main_panel.setOpaque(false);
         main_panel.setLayout(null);
 
+        close_btn.setBorder(null);
+        close_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/desktop_app/assets/close.png"))); // NOI18N
+        close_btn.setToolTipText("close");
+        close_btn.setAlignmentY(0.0F);
+        close_btn.setBorderPainted(false);
+        close_btn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        close_btn.setkAllowGradient(false);
+        close_btn.setkBackGroundColor(new java.awt.Color(255, 255, 255));
+        close_btn.setkHoverColor(new java.awt.Color(153, 153, 153));
+        close_btn.setkPressedColor(new java.awt.Color(255, 51, 0));
+        close_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                close_btnActionPerformed(evt);
+            }
+        });
+        main_panel.add(close_btn);
+        close_btn.setBounds(1020, 40, 20, 20);
+
+        jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.MOVE_CURSOR));
+        jPanel1.setOpaque(false);
+        jPanel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jPanel1MouseDragged(evt);
+            }
+        });
+        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jPanel1MousePressed(evt);
+            }
+        });
+        main_panel.add(jPanel1);
+        jPanel1.setBounds(20, 30, 970, 40);
+
         mid_panel.setBackground(new java.awt.Color(255, 255, 255));
+        mid_panel.setOpaque(false);
         mid_panel.setLayout(null);
 
         Title.setFont(new java.awt.Font("Product Sans", 1, 30)); // NOI18N
@@ -183,28 +229,18 @@ public class Log_in extends javax.swing.JFrame {
 
         mid_design.setIcon(new javax.swing.ImageIcon(getClass().getResource("/desktop_app/assets/mid_panel.png"))); // NOI18N
         mid_panel.add(mid_design);
-        mid_design.setBounds(30, 40, 500, 448);
+        mid_design.setBounds(30, 50, 500, 448);
 
         main_panel.add(mid_panel);
-        mid_panel.setBounds(240, 30, 560, 530);
+        mid_panel.setBounds(250, 30, 560, 540);
 
-        close_btn.setBorder(null);
-        close_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/desktop_app/assets/CLOSE.png"))); // NOI18N
-        close_btn.setToolTipText("close");
-        close_btn.setBorderPainted(false);
-        close_btn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        close_btn.setkAllowGradient(false);
-        close_btn.setkBackGroundColor(new java.awt.Color(255, 255, 255));
-        close_btn.setkHoverColor(new java.awt.Color(153, 153, 153));
-        close_btn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                close_btnActionPerformed(evt);
-            }
-        });
-        main_panel.add(close_btn);
-        close_btn.setBounds(1000, 20, 20, 20);
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/desktop_app/assets/main_design.png"))); // NOI18N
+        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        main_panel.add(jLabel1);
+        jLabel1.setBounds(0, 0, 1070, 600);
 
-        getContentPane().add(main_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1050, 580));
+        getContentPane().add(main_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1070, 600));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -284,6 +320,15 @@ public class Log_in extends javax.swing.JFrame {
 
     }//GEN-LAST:event_subtitle1MouseExited
 
+    private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
+        posX = evt.getX();
+        posY = evt.getY();
+    }//GEN-LAST:event_jPanel1MousePressed
+
+    private void jPanel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseDragged
+        setLocation(evt.getXOnScreen()-posX, evt.getYOnScreen()-posY);
+    }//GEN-LAST:event_jPanel1MouseDragged
+
     /**
      * @param args the command line arguments
      */
@@ -314,7 +359,12 @@ public class Log_in extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Log_in().setVisible(true);
+            Log_in logInFrame = new Log_in();
+            logInFrame.setVisible(true);
+           
+
+
+               
             }
         });
     }
@@ -327,6 +377,8 @@ public class Log_in extends javax.swing.JFrame {
     private com.k33ptoo.components.KButton close_btn;
     private javax.swing.JLabel footer;
     private javax.swing.JLabel input_design;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel main_panel;
     private javax.swing.JLabel mid_design;
     private javax.swing.JPanel mid_panel;
@@ -335,4 +387,9 @@ public class Log_in extends javax.swing.JFrame {
     private javax.swing.JLabel subtitle;
     private javax.swing.JLabel subtitle1;
     // End of variables declaration//GEN-END:variables
+
+    //custom declarations
+    int posX, posY;
+    
+    
 }
