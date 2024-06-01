@@ -6,6 +6,7 @@ package desktop_app;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -45,6 +46,7 @@ public class Log_in extends javax.swing.JFrame {
         pup_icon = new javax.swing.JLabel();
         footer = new javax.swing.JLabel();
         sign_in_btn = new com.k33ptoo.components.KButton();
+        pass_view = new javax.swing.JLabel();
         Pw_secured_field = new javax.swing.JPasswordField();
         Schl_ID_field = new javax.swing.JTextField();
         subtitle1 = new javax.swing.JLabel();
@@ -140,6 +142,17 @@ public class Log_in extends javax.swing.JFrame {
         mid_panel.add(sign_in_btn);
         sign_in_btn.setBounds(140, 370, 290, 40);
 
+        pass_view.setIcon(new javax.swing.ImageIcon(getClass().getResource("/desktop_app/assets/eye.png"))); // NOI18N
+        pass_view.setToolTipText("show");
+        pass_view.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        pass_view.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pass_viewMouseClicked(evt);
+            }
+        });
+        mid_panel.add(pass_view);
+        pass_view.setBounds(400, 320, 20, 20);
+
         Pw_secured_field.setFont(new java.awt.Font("Product Sans", 0, 12)); // NOI18N
         Pw_secured_field.setForeground(new java.awt.Color(204, 204, 204));
         Pw_secured_field.setText("Your password");
@@ -164,7 +177,7 @@ public class Log_in extends javax.swing.JFrame {
             }
         });
         mid_panel.add(Pw_secured_field);
-        Pw_secured_field.setBounds(180, 320, 240, 20);
+        Pw_secured_field.setBounds(180, 320, 210, 20);
 
         Schl_ID_field.setBackground(new java.awt.Color(255, 255, 255));
         Schl_ID_field.setFont(new java.awt.Font("Product Sans", 0, 12)); // NOI18N
@@ -245,6 +258,10 @@ public class Log_in extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    
+    
+    
     private void sign_in_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sign_in_btnActionPerformed
         System.out.println("Username: " + Schl_ID_field.getText());
         System.out.println("Password: " + Pw_secured_field.getText());
@@ -290,20 +307,21 @@ public class Log_in extends javax.swing.JFrame {
     }//GEN-LAST:event_Pw_secured_fieldKeyTyped
 
     private void Pw_secured_fieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Pw_secured_fieldFocusLost
-        if (Pw_secured_field.getText().isEmpty()) {
-            Pw_secured_field.setText("Your password");
-            Pw_secured_field.setForeground(Color.GRAY); // Optional: Set text color to gray when placeholder text is restored
-            Pw_secured_field.setEchoChar('\u0000');
-        }
+       if (Pw_secured_field.getPassword().length == 0) {
+        Pw_secured_field.setText("Your password");
+        Pw_secured_field.setForeground(Color.GRAY); // Optional: Set text color to gray when placeholder text is restored
+        togglePasswordVisibility(); // Hide the password when focus is lost
+    }
        
     }//GEN-LAST:event_Pw_secured_fieldFocusLost
 
     private void Pw_secured_fieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Pw_secured_fieldFocusGained
         if (Pw_secured_field.getText().equals("Your password")) {
-            Pw_secured_field.setText(null);
-            Pw_secured_field.setEchoChar('*');
-            Pw_secured_field.setForeground(Color.BLACK); // Optional: Set text color to black when focused
-        }
+        Pw_secured_field.setText(null);
+          Pw_secured_field.setEchoChar('*');
+        Pw_secured_field.setForeground(Color.BLACK); // Optional: Set text color to black when focused
+       // togglePasswordVisibility(); // Show the password when focused
+    }
     }//GEN-LAST:event_Pw_secured_fieldFocusGained
 
     private void Pw_secured_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Pw_secured_fieldActionPerformed
@@ -329,7 +347,28 @@ public class Log_in extends javax.swing.JFrame {
         setLocation(evt.getXOnScreen()-posX, evt.getYOnScreen()-posY);
     }//GEN-LAST:event_jPanel1MouseDragged
 
-    /**
+    private void pass_viewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pass_viewMouseClicked
+       togglePasswordVisibility(); 
+    }//GEN-LAST:event_pass_viewMouseClicked
+    
+    //custom functions
+    private void togglePasswordVisibility() {
+    if (isPasswordVisible) {
+        Pw_secured_field.setEchoChar('\u2022'); // Echo character for hiding password
+        pass_view.setIcon(new ImageIcon(getClass().getResource("/desktop_app/assets/eye.png")));
+        pass_view.setToolTipText("show");
+    } else {
+        Pw_secured_field.setEchoChar((char) 0); // Echo character for showing password
+        pass_view.setIcon(new ImageIcon(getClass().getResource("/desktop_app/assets/view.png")));
+        pass_view.setToolTipText("hide");
+    }
+    isPasswordVisible = !isPasswordVisible; // Toggle the state
+}
+
+    
+    
+    
+    /**\
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -382,6 +421,7 @@ public class Log_in extends javax.swing.JFrame {
     private javax.swing.JPanel main_panel;
     private javax.swing.JLabel mid_design;
     private javax.swing.JPanel mid_panel;
+    private javax.swing.JLabel pass_view;
     private javax.swing.JLabel pup_icon;
     private com.k33ptoo.components.KButton sign_in_btn;
     private javax.swing.JLabel subtitle;
@@ -390,6 +430,8 @@ public class Log_in extends javax.swing.JFrame {
 
     //custom declarations
     int posX, posY;
+    private boolean isEyeIcon = true;
+    private boolean isPasswordVisible = false;
     
     
 }
