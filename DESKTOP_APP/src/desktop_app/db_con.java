@@ -17,7 +17,7 @@ public class db_con {
     private static String username = "root";
     private static String dbname  = "admin_info";
     private static Integer portnumber  = 3306;
-    private static String password = "";
+    private static String password = "";//3543
     
     public static java.sql.Connection getConnection(){
         java.sql.Connection cnx = null;
@@ -41,3 +41,24 @@ public class db_con {
         return cnx;
     }
 }
+
+/*
+NOTES FOR SERVER ACCESS:
+CURRENTLY SET FOR STATIC IP 192.168.0.101
+       //maybe port listening also at localhost idk 127.0.0.0
+
+REMOTE ACCESS CREDENTIALS ARE
+mysql -u remote_user -h 192.168.0.101 -P 3306 -p
+pass: password
+
+replace 192.168.0.101 with 127.0.0.0 for testing
+
+localhost = ""
+192.168.0.101 = 3543
+
+CHANGE LISTENING IP
+479  netstat -tuln | grep 3306
+480  sudo nano /opt/lampp/etc/my.cnf
+reboot after
+
+*/
