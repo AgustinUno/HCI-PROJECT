@@ -76,6 +76,9 @@
               <Image iconType="3" name="/desktop_app/assets/back.png"/>
             </Property>
             <Property name="alignmentY" type="float" value="0.0"/>
+            <Property name="borderPainted" type="boolean" value="false"/>
+            <Property name="debugGraphicsOptions" type="int" value="-1"/>
+            <Property name="doubleBuffered" type="boolean" value="true"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="kAllowGradient" type="boolean" value="false"/>
             <Property name="kBackGroundColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">

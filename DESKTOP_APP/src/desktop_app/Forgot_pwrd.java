@@ -78,6 +78,9 @@ public class Forgot_pwrd extends javax.swing.JFrame {
         kButton1.setBorder(null);
         kButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/desktop_app/assets/back.png"))); // NOI18N
         kButton1.setAlignmentY(0.0F);
+        kButton1.setBorderPainted(false);
+        kButton1.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
+        kButton1.setDoubleBuffered(true);
         kButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         kButton1.setkAllowGradient(false);
         kButton1.setkBackGroundColor(new java.awt.Color(255, 255, 255));
@@ -183,11 +186,13 @@ public class Forgot_pwrd extends javax.swing.JFrame {
         Log_in fr = new Log_in();
         ArrayList<String> fetchedDataList = new ArrayList<>();
         fetchedDataList = fr.data_fetch("admin_data", "user_id");
-        System.out.println("Data: " + fetchedDataList);
+       
+
+        System.out.println("\nData: " + fetchedDataList);
 
         boolean userExists = false;
         for (String fetchedData : fetchedDataList) {
-            if (jLabel1.getText().equals(fetchedData)) {
+            if (jTextField1.getText().equals(fetchedData)) {
                 userExists = true;
                 break; 
             }
