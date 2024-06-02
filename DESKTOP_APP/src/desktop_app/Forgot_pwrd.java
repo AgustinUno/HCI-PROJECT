@@ -8,6 +8,7 @@ import java.awt.Color;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.Timer;
 
 /**
@@ -65,6 +66,7 @@ public class Forgot_pwrd extends javax.swing.JFrame {
         kButton2.setFont(new java.awt.Font("Product Sans", 1, 14)); // NOI18N
         kButton2.setkAllowGradient(false);
         kButton2.setkBackGroundColor(new java.awt.Color(17, 149, 230));
+        kButton2.setOpaque(true);
         kButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 kButton2ActionPerformed(evt);
@@ -80,8 +82,8 @@ public class Forgot_pwrd extends javax.swing.JFrame {
         kButton1.setkAllowGradient(false);
         kButton1.setkBackGroundColor(new java.awt.Color(255, 255, 255));
         kButton1.setkPressedColor(new java.awt.Color(255, 255, 255));
-        kButton1.setLabel("");
         kButton1.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        kButton1.setOpaque(true);
         kButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 kButton1MouseEntered(evt);
@@ -109,6 +111,7 @@ public class Forgot_pwrd extends javax.swing.JFrame {
         jTextField1.setForeground(new java.awt.Color(153, 153, 153));
         jTextField1.setText("Enter your username");
         jTextField1.setBorder(null);
+        jTextField1.setOpaque(true);
         jTextField1.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jTextField1FocusGained(evt);
@@ -176,7 +179,26 @@ public class Forgot_pwrd extends javax.swing.JFrame {
     }//GEN-LAST:event_formFocusLost
 
     private void kButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kButton2ActionPerformed
-        // TODO add your handling code here:
+
+        Log_in fr = new Log_in();
+        ArrayList<String> fetchedDataList = new ArrayList<>();
+        fetchedDataList = fr.data_fetch("admin_data", "user_id");
+        System.out.println("Data: " + fetchedDataList);
+
+        boolean userExists = false;
+        for (String fetchedData : fetchedDataList) {
+            if (jLabel1.getText().equals(fetchedData)) {
+                userExists = true;
+                break; 
+            }
+        }
+
+        if (userExists) {
+            System.out.println("User exists");
+        } else {
+            System.out.println("Try another username");
+        }
+
     }//GEN-LAST:event_kButton2ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -205,30 +227,30 @@ public class Forgot_pwrd extends javax.swing.JFrame {
         smoothMoveButton(20, 0); // Move right
     }//GEN-LAST:event_kButton1MouseExited
 
-    
     private void smoothMoveButton(int dx, int dy) {
-    Point currentPos = kButton1.getLocation();
-    Point targetPos = new Point(currentPos.x + dx, currentPos.y + dy);
+        Point currentPos = kButton1.getLocation();
+        Point targetPos = new Point(currentPos.x + dx, currentPos.y + dy);
 
-    Timer timer = new Timer(10, new ActionListener() {
-        private long startTime = System.currentTimeMillis();
-        private final long duration = 200; // milliseconds
+        Timer timer = new Timer(10, new ActionListener() {
+            private long startTime = System.currentTimeMillis();
+            private final long duration = 200; // milliseconds
 
-        public void actionPerformed(ActionEvent e) {
-            long elapsedTime = System.currentTimeMillis() - startTime;
-            double progress = (double) elapsedTime / duration;
-            if (progress >= 1.0) {
-                ((Timer) e.getSource()).stop();
-            } else {
-                int newX = (int) (currentPos.x + (targetPos.x - currentPos.x) * progress);
-                int newY = (int) (currentPos.y + (targetPos.y - currentPos.y) * progress);
-                kButton1.setLocation(newX, newY);
+            public void actionPerformed(ActionEvent e) {
+                long elapsedTime = System.currentTimeMillis() - startTime;
+                double progress = (double) elapsedTime / duration;
+                if (progress >= 1.0) {
+                    ((Timer) e.getSource()).stop();
+                } else {
+                    int newX = (int) (currentPos.x + (targetPos.x - currentPos.x) * progress);
+                    int newY = (int) (currentPos.y + (targetPos.y - currentPos.y) * progress);
+                    kButton1.setLocation(newX, newY);
+                }
             }
-        }
-    });
+        });
 
-    timer.start();
-}
+        timer.start();
+    }
+
     /**
      * @param args the command line arguments
      */

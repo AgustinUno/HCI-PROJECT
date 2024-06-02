@@ -7,13 +7,16 @@ package desktop_app;
 import com.mysql.cj.xdevapi.Statement;
 import com.sun.jdi.connect.spi.Connection;
 import java.awt.Color;
+import java.awt.List;
 import java.sql.PreparedStatement;
 import javax.swing.ImageIcon;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -59,12 +62,13 @@ public class Log_in extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Administrator Access");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setFocusCycleRoot(false);
         setLocationByPlatform(true);
         setModalExclusionType(null);
+        setUndecorated(true);
         setResizable(false);
         addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -83,7 +87,7 @@ public class Log_in extends javax.swing.JFrame {
 
         main_panel.setBackground(new java.awt.Color(255, 255, 255));
         main_panel.setOpaque(false);
-        main_panel.setLayout(null);
+        main_panel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         close_btn.setBorder(null);
         close_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/desktop_app/assets/close.png"))); // NOI18N
@@ -100,8 +104,7 @@ public class Log_in extends javax.swing.JFrame {
                 close_btnActionPerformed(evt);
             }
         });
-        main_panel.add(close_btn);
-        close_btn.setBounds(1020, 40, 20, 20);
+        main_panel.add(close_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 40, 20, 20));
 
         jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.MOVE_CURSOR));
         jPanel1.setOpaque(false);
@@ -115,8 +118,7 @@ public class Log_in extends javax.swing.JFrame {
                 jPanel1MousePressed(evt);
             }
         });
-        main_panel.add(jPanel1);
-        jPanel1.setBounds(20, 30, 970, 40);
+        main_panel.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 970, 40));
 
         mid_panel.setBackground(new java.awt.Color(255, 255, 255));
         mid_panel.setOpaque(false);
@@ -143,6 +145,7 @@ public class Log_in extends javax.swing.JFrame {
         mid_panel.add(footer);
         footer.setBounds(80, 430, 410, 20);
 
+        sign_in_btn.setBackground(new java.awt.Color(255, 255, 255));
         sign_in_btn.setBorder(null);
         sign_in_btn.setText("Sign In");
         sign_in_btn.setFont(new java.awt.Font("Product Sans", 1, 14)); // NOI18N
@@ -151,6 +154,7 @@ public class Log_in extends javax.swing.JFrame {
         sign_in_btn.setkBackGroundColor(new java.awt.Color(17, 149, 230));
         sign_in_btn.setkHoverColor(new java.awt.Color(204, 204, 255));
         sign_in_btn.setkHoverForeGround(new java.awt.Color(153, 153, 153));
+        sign_in_btn.setOpaque(true);
         sign_in_btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sign_in_btnActionPerformed(evt);
@@ -173,8 +177,10 @@ public class Log_in extends javax.swing.JFrame {
         Pw_secured_field.setFont(new java.awt.Font("Product Sans", 0, 12)); // NOI18N
         Pw_secured_field.setForeground(new java.awt.Color(204, 204, 204));
         Pw_secured_field.setText("Your password");
-        Pw_secured_field.setBorder(null);
+        Pw_secured_field.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 2));
+        Pw_secured_field.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
         Pw_secured_field.setEchoChar('\u0000');
+        Pw_secured_field.setOpaque(true);
         Pw_secured_field.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 Pw_secured_fieldFocusGained(evt);
@@ -201,6 +207,8 @@ public class Log_in extends javax.swing.JFrame {
         Schl_ID_field.setForeground(new java.awt.Color(204, 204, 204));
         Schl_ID_field.setText("Your school id number");
         Schl_ID_field.setBorder(null);
+        Schl_ID_field.setNextFocusableComponent(Pw_secured_field);
+        Schl_ID_field.setOpaque(true);
         Schl_ID_field.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 Schl_ID_fieldFocusGained(evt);
@@ -264,16 +272,16 @@ public class Log_in extends javax.swing.JFrame {
         mid_panel.add(mid_design);
         mid_design.setBounds(30, 40, 500, 448);
 
-        main_panel.add(mid_panel);
-        mid_panel.setBounds(250, 30, 560, 540);
+        main_panel.add(mid_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 30, 560, 540));
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/desktop_app/assets/main_design.png"))); // NOI18N
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        main_panel.add(jLabel1);
-        jLabel1.setBounds(0, 0, 1070, 600);
-        main_panel.add(jPanel2);
-        jPanel2.setBounds(30, 30, 1000, 540);
+        main_panel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1070, 600));
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        main_panel.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 1000, 540));
 
         getContentPane().add(main_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1070, 600));
 
@@ -443,6 +451,38 @@ public class Log_in extends javax.swing.JFrame {
             ex.printStackTrace();
         }
     }
+    
+   public ArrayList<String> data_fetch(String tableName, String columnName) {
+    PreparedStatement ps;
+    ResultSet rs;
+    ArrayList<String> fetchedDataList = new ArrayList<>();
+    
+    String query = "SELECT " + columnName + " FROM " + tableName;
+    
+    try {
+        ps = Db_con.getConnection().prepareStatement(query);
+        
+        rs = ps.executeQuery();
+
+        // Iterate over the ResultSet to fetch each row
+        while (rs.next()) {
+            // Data exists
+            String fetchedData = rs.getString(columnName);
+            fetchedDataList.add(fetchedData);
+        }
+
+        // Close ResultSet, PreparedStatement, and Connection
+        rs.close();
+        ps.close();
+    } catch (SQLException ex) {
+        // Handle SQL exceptions
+        ex.printStackTrace();
+    }
+    
+    return fetchedDataList;
+}
+
+
 
     /**
      * \
