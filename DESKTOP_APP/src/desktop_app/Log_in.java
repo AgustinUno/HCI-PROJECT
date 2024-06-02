@@ -4,19 +4,18 @@
  */
 package desktop_app;
 
-import com.mysql.cj.xdevapi.Statement;
-import com.sun.jdi.connect.spi.Connection;
+
 import java.awt.Color;
-import java.awt.List;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.PreparedStatement;
 import javax.swing.ImageIcon;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
+import javax.swing.Timer;
+
 
 /**
  *
@@ -33,6 +32,8 @@ public class Log_in extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null); //Center the frame to screen
 
+         // Create a new JFXPanel
+       
     }
 
     /**
@@ -515,11 +516,35 @@ public class Log_in extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                Log_in logInFrame = new Log_in();
-                logInFrame.setVisible(true);
+               public void run() {
+        Log_in logInFrame = new Log_in();
 
+        // Set initial opacity to 0 (fully transparent)
+        logInFrame.setOpacity(0);
+
+        // Create a timer for the animation
+        int animationDuration = 150; // Duration of the animation in milliseconds
+        int steps = 50; // Number of animation steps
+        int delay = animationDuration / steps;
+
+        Timer timer = new Timer(delay, new ActionListener() {
+            private int step = 0;
+
+            public void actionPerformed(ActionEvent e) {
+                float alpha = (float) step / steps;
+                logInFrame.setOpacity(alpha);
+                step++;
+                if (step > steps) {
+                    ((Timer) e.getSource()).stop();
+                }
             }
+        });
+
+        // Start the timer
+        timer.start();
+
+        logInFrame.setVisible(true);
+    }
         });
     }
 
