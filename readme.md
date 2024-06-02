@@ -13,6 +13,9 @@ Welcome to the Facility Management System (FMS) prototype repository! This proje
 ## Introduction
 The Facility Management System (FMS) is a prototype designed to streamline the management of facilities across different locations with WAN server access. Whether you're managing office spaces, warehouses, or any other facilities, FMS provides a comprehensive solution for tracking, maintenance, and optimization.
 
+## Meet the Creators
+Justine Bautista - Raven Dela Cruz - Regie San Juan
+
 ## Features
 - **WAN Server Access:** Access the FMS from anywhere with a WAN connection, enabling remote management of facilities.
 - **Facility Tracking:** Keep track of various facilities, including their locations, capacities, and current statuses.
@@ -26,7 +29,7 @@ To get started with FMS, follow these steps:
 2. Install dependencies using `npm install` or `yarn install`.
 3. Configure the database settings in `config.js`.
 4. Run the server using `npm start` or `yarn start`.
-5. Access the FMS application through your browser at `http://localhost:3000`.
+5. Access the FMS application through your browser at `http://localhost:3000`. or `http://your_ip:your_port`
 
 ## Usage
 Once installed, you can use FMS to manage your facilities efficiently. Here are some common tasks:
