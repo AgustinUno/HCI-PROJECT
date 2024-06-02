@@ -4,20 +4,18 @@
  */
 package desktop_app;
 
+
 import java.awt.Color;
-import java.awt.Font;
-import java.awt.FontFormatException;
-import java.awt.GraphicsEnvironment;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
 import java.sql.PreparedStatement;
 import javax.swing.ImageIcon;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.Timer;
+
 
 /**
  *
@@ -25,39 +23,17 @@ import javax.swing.Timer;
  */
 public class Log_in extends javax.swing.JFrame {
 
-    // Define font variables
-    Font boldFont;
-    Font italicFont;
-    Font boldItalicFont;
-    Font regularFont;
-
     /**
      * Creates new form Log_in
      */
     public Log_in() {
-        try {
-            boldFont = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/Bold.ttf"));
-            italicFont = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/Italic.ttf"));
-            boldItalicFont = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/BoldItalic.ttf"));
-            regularFont = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/Regular.ttf"));
-            Title.setFont(Font.createFont(Font.TRUETYPE_FONT, new File("fonts/Bold.ttf")).deriveFont(Font.BOLD, 30));
-            // Register the fonts with the graphics environment
-            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            ge.registerFont(boldFont);
-            ge.registerFont(italicFont);
-            ge.registerFont(boldItalicFont);
-            ge.registerFont(regularFont);
-
-        } catch (FontFormatException | IOException e) {
-            // Handle the exception appropriately (e.g., log or display an error message)
-
-        }
         setUndecorated(true);
         setBackground(new Color(0.0f, 0.0f, 0.0f, 0.0f));
         initComponents();
         setLocationRelativeTo(null); //Center the frame to screen
 
-        // Create a new JFXPanel
+         // Create a new JFXPanel
+       
     }
 
     /**
@@ -173,20 +149,13 @@ public class Log_in extends javax.swing.JFrame {
         sign_in_btn.setBackground(new java.awt.Color(255, 255, 255));
         sign_in_btn.setBorder(null);
         sign_in_btn.setText("Sign In");
-        sign_in_btn.setBorderPainted(false);
-        sign_in_btn.setContentAreaFilled(false);
-        sign_in_btn.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
         sign_in_btn.setFont(new java.awt.Font("Product Sans", 1, 14)); // NOI18N
         sign_in_btn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         sign_in_btn.setkAllowGradient(false);
         sign_in_btn.setkBackGroundColor(new java.awt.Color(17, 149, 230));
         sign_in_btn.setkHoverColor(new java.awt.Color(204, 204, 255));
-        sign_in_btn.setkHoverForeGround(new java.awt.Color(255, 255, 255));
-        sign_in_btn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                sign_in_btnMouseEntered(evt);
-            }
-        });
+        sign_in_btn.setkHoverForeGround(new java.awt.Color(153, 153, 153));
+        sign_in_btn.setOpaque(true);
         sign_in_btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sign_in_btnActionPerformed(evt);
@@ -286,10 +255,8 @@ public class Log_in extends javax.swing.JFrame {
         mid_panel.add(subtitle1);
         subtitle1.setBounds(332, 287, 110, 20);
 
-        input_design.setBackground(new java.awt.Color(255, 255, 255));
         input_design.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         input_design.setIcon(new javax.swing.ImageIcon(getClass().getResource("/desktop_app/assets/Labels.png"))); // NOI18N
-        input_design.setOpaque(true);
         mid_panel.add(input_design);
         input_design.setBounds(100, 180, 370, 210);
 
@@ -417,29 +384,25 @@ public class Log_in extends javax.swing.JFrame {
     private void subtitle1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_subtitle1MouseClicked
         Forgot_pwrd frame = new Forgot_pwrd();
         frame.setVisible(true);
-
-
+     
+       
     }//GEN-LAST:event_subtitle1MouseClicked
 
     private void formMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseEntered
-
+          
     }//GEN-LAST:event_formMouseEntered
 
     private void formFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formFocusGained
-        Log_in fr1 = new Log_in();
+           Log_in fr1 = new Log_in();
         Forgot_pwrd fr2 = new Forgot_pwrd();
         fr1.setOpacity(0.5f);
         fr2.setOpacity(1.0f);
     }//GEN-LAST:event_formFocusGained
 
     private void formFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formFocusLost
-        Log_in fr1 = new Log_in();
+          Log_in fr1 = new Log_in();
         fr1.setOpacity(1.0f);
     }//GEN-LAST:event_formFocusLost
-
-    private void sign_in_btnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sign_in_btnMouseEntered
-
-    }//GEN-LAST:event_sign_in_btnMouseEntered
 
     //custom functions
     private void togglePasswordVisibility() {
@@ -454,7 +417,6 @@ public class Log_in extends javax.swing.JFrame {
         }
         isPasswordVisible = !isPasswordVisible; // Toggle the state
     }
-// Create an instance of Custom_dialog
 
     public void admin_check() {
         PreparedStatement ps;
@@ -465,7 +427,7 @@ public class Log_in extends javax.swing.JFrame {
         password = new String(Pw_secured_field.getPassword()).trim();
 
         String query = "SELECT * FROM admin_data WHERE user_id = ? AND pass = ?";
-
+        
         try {
             ps = Db_con.getConnection().prepareStatement(query);
             ps.setString(1, schoolId);
@@ -475,15 +437,11 @@ public class Log_in extends javax.swing.JFrame {
 
             // Check if the ResultSet contains any rows
             if (rs.next()) {
-                // Set any additional properties or parameters if needed
-
-// Display the dialog
-                Pane_cover dialog = new Pane_cover(new javax.swing.JFrame(), true);
-                dialog.setVisible(true);
+                // User exists
+                JOptionPane.showMessageDialog(null, "WELCOME ADMIN!");
             } else {
                 // User does not exist
-                Pane_cover dialog = new Pane_cover(new javax.swing.JFrame(), true);
-                dialog.setVisible(true);
+                JOptionPane.showMessageDialog(null, "INVALID CREDENTIALS");
             }
 
             // Close ResultSet, PreparedStatement, and Connection
@@ -494,36 +452,38 @@ public class Log_in extends javax.swing.JFrame {
             ex.printStackTrace();
         }
     }
+    
+   public ArrayList<String> data_fetch(String tableName, String columnName) {
+    PreparedStatement ps;
+    ResultSet rs;
+    ArrayList<String> fetchedDataList = new ArrayList<>();
+    
+    String query = "SELECT " + columnName + " FROM " + tableName;
+    
+    try {
+        ps = Db_con.getConnection().prepareStatement(query);
+        
+        rs = ps.executeQuery();
 
-    public ArrayList<String> data_fetch(String tableName, String columnName) {
-        PreparedStatement ps;
-        ResultSet rs;
-        ArrayList<String> fetchedDataList = new ArrayList<>();
-
-        String query = "SELECT " + columnName + " FROM " + tableName;
-
-        try {
-            ps = Db_con.getConnection().prepareStatement(query);
-
-            rs = ps.executeQuery();
-
-            // Iterate over the ResultSet to fetch each row
-            while (rs.next()) {
-                // Data exists
-                String fetchedData = rs.getString(columnName);
-                fetchedDataList.add(fetchedData);
-            }
-
-            // Close ResultSet, PreparedStatement, and Connection
-            rs.close();
-            ps.close();
-        } catch (SQLException ex) {
-            // Handle SQL exceptions
-            ex.printStackTrace();
+        // Iterate over the ResultSet to fetch each row
+        while (rs.next()) {
+            // Data exists
+            String fetchedData = rs.getString(columnName);
+            fetchedDataList.add(fetchedData);
         }
 
-        return fetchedDataList;
+        // Close ResultSet, PreparedStatement, and Connection
+        rs.close();
+        ps.close();
+    } catch (SQLException ex) {
+        // Handle SQL exceptions
+        ex.printStackTrace();
     }
+    
+    return fetchedDataList;
+}
+
+
 
     /**
      * \
@@ -556,35 +516,35 @@ public class Log_in extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                Log_in logInFrame = new Log_in();
+               public void run() {
+        Log_in logInFrame = new Log_in();
 
-                // Set initial opacity to 0 (fully transparent)
-                logInFrame.setOpacity(0);
+        // Set initial opacity to 0 (fully transparent)
+        logInFrame.setOpacity(0);
 
-                // Create a timer for the animation
-                int animationDuration = 150; // Duration of the animation in milliseconds
-                int steps = 50; // Number of animation steps
-                int delay = animationDuration / steps;
+        // Create a timer for the animation
+        int animationDuration = 150; // Duration of the animation in milliseconds
+        int steps = 50; // Number of animation steps
+        int delay = animationDuration / steps;
 
-                Timer timer = new Timer(delay, new ActionListener() {
-                    private int step = 0;
+        Timer timer = new Timer(delay, new ActionListener() {
+            private int step = 0;
 
-                    public void actionPerformed(ActionEvent e) {
-                        float alpha = (float) step / steps;
-                        logInFrame.setOpacity(alpha);
-                        step++;
-                        if (step > steps) {
-                            ((Timer) e.getSource()).stop();
-                        }
-                    }
-                });
-
-                // Start the timer
-                timer.start();
-
-                logInFrame.setVisible(true);
+            public void actionPerformed(ActionEvent e) {
+                float alpha = (float) step / steps;
+                logInFrame.setOpacity(alpha);
+                step++;
+                if (step > steps) {
+                    ((Timer) e.getSource()).stop();
+                }
             }
+        });
+
+        // Start the timer
+        timer.start();
+
+        logInFrame.setVisible(true);
+    }
         });
     }
 
