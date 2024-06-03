@@ -6,10 +6,10 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 
 
-public class Pane_cover extends javax.swing.JDialog {
+public class Custom_dialogs extends javax.swing.JDialog {
 
 
-    public Pane_cover(java.awt.Frame parent, boolean modal) {
+    public Custom_dialogs(java.awt.Frame parent, boolean modal) {
     super(parent, modal);
     setUndecorated(true);
     setBackground(new Color(0.0f, 0.0f, 0.0f, 0.0f));

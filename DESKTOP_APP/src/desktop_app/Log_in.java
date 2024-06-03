@@ -415,10 +415,8 @@ public class Log_in extends javax.swing.JFrame {
     }//GEN-LAST:event_pass_viewMouseClicked
 
     private void subtitle1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_subtitle1MouseClicked
-        Forgot_pwrd frame = new Forgot_pwrd();
-        frame.setVisible(true);
-
-
+        Custom_animations.animateFrame(forgot, 150, 50);
+        forgot.setVisible(true);
     }//GEN-LAST:event_subtitle1MouseClicked
 
     private void formMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseEntered
@@ -478,12 +476,12 @@ public class Log_in extends javax.swing.JFrame {
                 // Set any additional properties or parameters if needed
 
 // Display the dialog
-                Pane_cover dialog = new Pane_cover(new javax.swing.JFrame(), true);
-                dialog.setVisible(true);
+//                Pane_cover dialog = new Pane_cover(new javax.swing.JFrame(), true);
+//                dialog.setVisible(true);
             } else {
                 // User does not exist
-                Pane_cover dialog = new Pane_cover(new javax.swing.JFrame(), true);
-                dialog.setVisible(true);
+//                Pane_cover dialog = new Pane_cover(new javax.swing.JFrame(), true);
+//                dialog.setVisible(true);
             }
 
             // Close ResultSet, PreparedStatement, and Connection
@@ -530,59 +528,11 @@ public class Log_in extends javax.swing.JFrame {
      *
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Log_in.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Log_in.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Log_in.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Log_in.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
+    public static void main(String[] args) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 Log_in logInFrame = new Log_in();
-
-                // Set initial opacity to 0 (fully transparent)
-                logInFrame.setOpacity(0);
-
-                // Create a timer for the animation
-                int animationDuration = 150; // Duration of the animation in milliseconds
-                int steps = 50; // Number of animation steps
-                int delay = animationDuration / steps;
-
-                Timer timer = new Timer(delay, new ActionListener() {
-                    private int step = 0;
-
-                    public void actionPerformed(ActionEvent e) {
-                        float alpha = (float) step / steps;
-                        logInFrame.setOpacity(alpha);
-                        step++;
-                        if (step > steps) {
-                            ((Timer) e.getSource()).stop();
-                        }
-                    }
-                });
-
-                // Start the timer
-                timer.start();
-
+                Custom_animations.animateFrame(logInFrame, 150, 50);
                 logInFrame.setVisible(true);
             }
         });
@@ -613,5 +563,6 @@ public class Log_in extends javax.swing.JFrame {
     int posX, posY;
     private boolean isEyeIcon = true;
     private boolean isPasswordVisible = false;
+    public static  Forgot_pwrd forgot = new Forgot_pwrd();
 
 }

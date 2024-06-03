@@ -79,6 +79,7 @@ public class Forgot_pwrd extends javax.swing.JFrame {
 
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/desktop_app/assets/back.png"))); // NOI18N
+        jLabel6.setToolTipText("return to Log In");
         jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel6MouseClicked(evt);
@@ -169,13 +170,12 @@ public class Forgot_pwrd extends javax.swing.JFrame {
         Forgot_pwrd fr2 = new Forgot_pwrd();
         fr2.setOpacity(1.0f);
     }//GEN-LAST:event_formFocusLost
-
+    int attempt = 1;
     private void kButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kButton2ActionPerformed
 
         Log_in fr = new Log_in();
         ArrayList<String> fetchedDataList = new ArrayList<>();
         fetchedDataList = fr.data_fetch("admin_data", "user_id");
-       
 
         System.out.println("\nData: " + fetchedDataList);
 
@@ -183,10 +183,11 @@ public class Forgot_pwrd extends javax.swing.JFrame {
         for (String fetchedData : fetchedDataList) {
             if (jTextField1.getText().equals(fetchedData)) {
                 userExists = true;
-                break; 
+                break;
             }
         }
-
+        System.out.printf("Attempt[%d]: ", attempt);
+        attempt++;
         if (userExists) {
             System.out.println("User exists");
         } else {
@@ -218,7 +219,6 @@ public class Forgot_pwrd extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel6KeyPressed
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
-        
         dispose();
     }//GEN-LAST:event_jLabel6MouseClicked
 
@@ -227,10 +227,8 @@ public class Forgot_pwrd extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel6MouseEntered
 
     private void jLabel6MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseExited
-         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/desktop_app/assets/back.png"))); // NOI18N
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/desktop_app/assets/back.png"))); // NOI18N
     }//GEN-LAST:event_jLabel6MouseExited
-   
-    
 
     /**
      * @param args the command line arguments
@@ -263,7 +261,9 @@ public class Forgot_pwrd extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Forgot_pwrd().setVisible(true);
+                Forgot_pwrd frame = new Forgot_pwrd();
+                Custom_animations.animateFrame(frame, 150, 50);
+                frame.setVisible(true);
             }
         });
     }
