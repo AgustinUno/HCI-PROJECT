@@ -358,6 +358,7 @@ public class Log_in extends javax.swing.JFrame {
     }//GEN-LAST:event_Schl_ID_fieldFocusLost
 
     private void close_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_close_btnActionPerformed
+        Custom_animations.fadeOut(logInFrame, 150, 50);
         dispose(); // Close the frame
         System.exit(0);
     }//GEN-LAST:event_close_btnActionPerformed
@@ -415,7 +416,7 @@ public class Log_in extends javax.swing.JFrame {
     }//GEN-LAST:event_pass_viewMouseClicked
 
     private void subtitle1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_subtitle1MouseClicked
-        Custom_animations.animateFrame(forgot, 150, 50);
+        Custom_animations.fadeIn(forgot, 150, 50);
         forgot.setVisible(true);
     }//GEN-LAST:event_subtitle1MouseClicked
 
@@ -531,8 +532,8 @@ public class Log_in extends javax.swing.JFrame {
     public static void main(String[] args) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Log_in logInFrame = new Log_in();
-                Custom_animations.animateFrame(logInFrame, 150, 50);
+
+                anim.fadeIn(logInFrame, 150, 50);
                 logInFrame.setVisible(true);
             }
         });
@@ -563,6 +564,7 @@ public class Log_in extends javax.swing.JFrame {
     int posX, posY;
     private boolean isEyeIcon = true;
     private boolean isPasswordVisible = false;
-    public static  Forgot_pwrd forgot = new Forgot_pwrd();
-
+    public static Forgot_pwrd forgot = new Forgot_pwrd();
+    public static Custom_animations anim = new Custom_animations();
+    static Log_in logInFrame = new Log_in();
 }

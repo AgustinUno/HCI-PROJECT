@@ -147,7 +147,7 @@ public class Forgot_pwrd extends javax.swing.JFrame {
         jLabel3.setBounds(170, 100, 190, 30);
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/desktop_app/assets/mid_panel.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/desktop_app/assets/mid_panel_blue.png"))); // NOI18N
         jPanel1.add(jLabel1);
         jLabel1.setBounds(0, 0, 520, 470);
         jPanel1.add(jPanel2);
@@ -219,6 +219,7 @@ public class Forgot_pwrd extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel6KeyPressed
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+         Custom_animations.fadeOut(frame, 150, 50);
         dispose();
     }//GEN-LAST:event_jLabel6MouseClicked
 
@@ -261,8 +262,8 @@ public class Forgot_pwrd extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Forgot_pwrd frame = new Forgot_pwrd();
-                Custom_animations.animateFrame(frame, 150, 50);
+              
+                Custom_animations.fadeIn(frame, 150, 50);
                 frame.setVisible(true);
             }
         });
@@ -280,4 +281,5 @@ public class Forgot_pwrd extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     private com.k33ptoo.components.KButton kButton2;
     // End of variables declaration//GEN-END:variables
+  static Forgot_pwrd frame = new Forgot_pwrd();
 }
