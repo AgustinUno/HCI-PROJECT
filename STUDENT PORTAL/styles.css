@@ -1,0 +1,21 @@
+
+
+
+
+/* CUSTOM FONT DECLARATIONS */
+@font-face {
+    font-family: "Bold";
+    src: local("Bold"),
+      url("Google/ProductSans-Bold.ttf")
+        format("truetype");
+    font-weight: lighter;
+  }
+
+.main{
+    font-family: Bold;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Adjust as needed */
+}

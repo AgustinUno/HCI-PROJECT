@@ -182,6 +182,7 @@ public class Log_in extends javax.swing.JFrame {
         sign_in_btn.setkBackGroundColor(new java.awt.Color(17, 149, 230));
         sign_in_btn.setkHoverColor(new java.awt.Color(204, 204, 255));
         sign_in_btn.setkHoverForeGround(new java.awt.Color(255, 255, 255));
+        sign_in_btn.setOpaque(true);
         sign_in_btn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 sign_in_btnMouseEntered(evt);
@@ -265,13 +266,14 @@ public class Log_in extends javax.swing.JFrame {
         mid_panel.add(Schl_ID_field);
         Schl_ID_field.setBounds(180, 250, 240, 20);
 
-        subtitle1.setBackground(new java.awt.Color(102, 102, 102));
+        subtitle1.setBackground(new java.awt.Color(255, 255, 255));
         subtitle1.setFont(new java.awt.Font("Product Sans", 0, 11)); // NOI18N
         subtitle1.setForeground(new java.awt.Color(17, 149, 230));
         subtitle1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         subtitle1.setText("Forgot password");
         subtitle1.setToolTipText("");
         subtitle1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        subtitle1.setOpaque(true);
         subtitle1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 subtitle1MouseClicked(evt);
@@ -481,6 +483,9 @@ public class Log_in extends javax.swing.JFrame {
 //                dialog.setVisible(true);
             } else {
                 // User does not exist
+                anim.fadeIn(dia, 150, 50);
+                dia.setVisible(true);
+             
 //                Pane_cover dialog = new Pane_cover(new javax.swing.JFrame(), true);
 //                dialog.setVisible(true);
             }
@@ -567,4 +572,6 @@ public class Log_in extends javax.swing.JFrame {
     public static Forgot_pwrd forgot = new Forgot_pwrd();
     public static Custom_animations anim = new Custom_animations();
     static Log_in logInFrame = new Log_in();
+    static Custom_pane dia = new Custom_pane();
+  
 }
