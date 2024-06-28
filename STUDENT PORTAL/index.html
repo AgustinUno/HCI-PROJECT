@@ -4,136 +4,28 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles.css" />
-    <title>STUDENT PORTAL</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <title>STUDENT LOG IN PANEL</title>
   </head>
   <body>
     <div class="main">
-      <h2>Student Portal</h2>
-      <form action="submit.php" method="post">
-        <label for="name">Student ID:</label>
-        <input type="text" id="name" name="name" required /><br /><br />
-        <label for="email">Password:</label>
-        <input type="email" id="email" name="email" required /><br /><br />
-        <input type="submit" value="Log In" />
-      </form>
-      <button id="qrLogin">Log In with QR Code</button>
-      <div id="qrCodeReader" style="display: none">
-        <div id="qrCodeContainer"></div>
+      <div class="login-panel">
+        <img src="pup logo.png" class="logo" />
+        <h2>Student Access</h2>
+        <p>Welcome back! Please enter your details</p>
+        <form action="submit.php" method="post">
+          <label for="username">Student ID:</label>
+          <input type="text" id="username" name="username" required />
+
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" required />
+          <a href="forget.html" class="forgot-password">Forgot password</a>
+
+          <input type="submit" value="Sign In" />
+        </form>
+        <p class="university-name">
+          Polytechnic University of the Philippines - San Juan Campus
+        </p>
       </div>
     </div>
-
-    <script>
-      const qrLogin = document.getElementById("qrLogin");
-      const qrCodeReader = document.getElementById("qrCodeReader");
-      const qrCodeContainer = document.getElementById("qrCodeContainer");
-
-      qrLogin.addEventListener("click", () => {
-        requestCameraAccess();
-      });
-
-      function requestCameraAccess() {
-        navigator.mediaDevices
-          .getUserMedia({ video: { facingMode: "environment" } })
-          .then((stream) => {
-            qrCodeReader.style.display = "block";
-            startQRCodeScanner(stream);
-          })
-          .catch((error) => {
-            console.error("Error accessing camera:", error);
-            alert(
-              "Unable to access the camera. Please check your camera permissions."
-            );
-          });
-      }
-
-      function startQRCodeScanner(stream) {
-        const video = document.createElement("video");
-        const canvasElement = document.createElement("canvas");
-        const canvas = canvasElement.getContext("2d");
-
-        function drawLine(begin, end, color) {
-          canvas.beginPath();
-          canvas.moveTo(begin.x, begin.y);
-          canvas.lineTo(end.x, end.y);
-          canvas.lineWidth = 4;
-          canvas.strokeStyle = color;
-          canvas.stroke();
-        }
-
-        video.srcObject = stream;
-        video.setAttribute("playsinline", true);
-        video.play();
-        qrCodeContainer.appendChild(video); // Append the video element to the container
-
-        requestAnimationFrame(tick);
-
-        function tick() {
-          if (video.readyState === video.HAVE_ENOUGH_DATA) {
-            canvasElement.height = video.videoHeight;
-            canvasElement.width = video.videoWidth;
-            canvas.drawImage(
-              video,
-              0,
-              0,
-              canvasElement.width,
-              canvasElement.height
-            );
-            const imageData = canvas.getImageData(
-              0,
-              0,
-              canvasElement.width,
-              canvasElement.height
-            );
-            const code = jsQR(
-              imageData.data,
-              imageData.width,
-              imageData.height,
-              {
-                inversionAttempts: "dontInvert",
-              }
-            );
-
-            if (code) {
-              drawLine(
-                code.location.topLeftCorner,
-                code.location.topRightCorner,
-                "#FF3B58"
-              );
-              drawLine(
-                code.location.topRightCorner,
-                code.location.bottomRightCorner,
-                "#FF3B58"
-              );
-              drawLine(
-                code.location.bottomRightCorner,
-                code.location.bottomLeftCorner,
-                "#FF3B58"
-              );
-              drawLine(
-                code.location.bottomLeftCorner,
-                code.location.topLeftCorner,
-                "#FF3B58"
-              );
-
-              const formData = new FormData();
-              formData.append("qrCode", code.data);
-              fetch("submit.php", {
-                method: "POST",
-                body: formData,
-              })
-                .then((response) => response.text())
-                .then((result) => {
-                  console.log(result);
-                })
-                .catch((error) => {
-                  console.error("Error:", error);
-                });
-            }
-          }
-          requestAnimationFrame(tick);
-        }
-      }
-    </script>
   </body>
 </html>

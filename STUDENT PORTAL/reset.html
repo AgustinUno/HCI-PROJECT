@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Reset Password</title>
+  </head>
+  <body>
+    <div class="main">
+      <div class="reset-password-panel">
+        <h2>Reset Password</h2>
+        <p>
+          Your Password must be at least 6 characters and should include a
+          combination of numbers, letters, and special characters
+        </p>
+        <form action="reset_password.php" method="post">
+          <input
+            type="password"
+            id="new-password"
+            name="new-password"
+            placeholder="New Password"
+            required
+          />
+          <input
+            type="password"
+            id="confirm-password"
+            name="confirm-password"
+            placeholder="Re-Type New Password"
+            required
+          />
+          <input type="submit" value="Reset Password" />
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
